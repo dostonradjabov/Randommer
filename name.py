@@ -14,8 +14,19 @@ class Name(Randommer):
         Returns:
             list: list of names
         '''
-        pass
-    
+        endpoint = "Name"
+        url = self.get_url() + endpoint # https://randommer.io/api/Name
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+        payload = {
+            "nameType": nameType,
+            "quantity": quantity
+        }
+
+        response = requests.get(url, params = payload, headers = headers)
+
     def get_name_suggestions(self, api_key: str, startingWords: str) -> list:
         '''get name suggestions
 
@@ -26,7 +37,17 @@ class Name(Randommer):
         Returns:
             list: list of name suggestions
         '''
-        pass
+        endpoint = "Name"
+        url = self.get_url() + endpoint # https://randommer.io/api/Name/Suggestions
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+        payload = {
+            "startingWords": startingWords
+        }
+
+        response = requests.get(url, params = payload, headers = headers)
     
     def get_name_cultures(self, api_key: str) -> list:
         '''get available cultures
@@ -37,4 +58,13 @@ class Name(Randommer):
         Returns:
             list: list of names
         '''
-        pass
+        endpoint = "Name/Cultures"
+        url = self.get_url() + endpoint # https://randommer.io/api/Name/Suggestions
+
+        headers = {
+            "X-Api-Key": api_key
+
+            }
+            
+
+        response = requests.get(url, headers = headers)
