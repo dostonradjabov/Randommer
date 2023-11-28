@@ -14,8 +14,22 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
-    
+        endpoint = "Phone/Generate"
+        url = self.get_url() + endpoint # https://randommer.io/api/Phone/Generate
+        headers = {
+            "X-Api-Key": api_key,
+        }
+        payload = {
+            "Quantity": Quantity
+        }
+
+        response = requests.get(url, params = payload, headers = headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
+
     def get_IMEI(self, api_key: str, Quantity: int) -> list:
         '''get bulk imei
 
@@ -26,7 +40,21 @@ class Phone(Randommer):
         Returns:
             list: list of phone numbers
         '''
-        pass
+        endpoint = "Phone/IMEI"
+        url = self.get_url() + endpoint # https://randommer.io/api/Phone/IMEI
+        headers = {
+            "X-Api-Key": api_key,
+        }
+        payload = {
+            "Quantity": Quantity
+        }
+
+        response = requests.get(url, params = payload, headers = headers)
+        
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
     
     def is_valid(self, api_key: str, telephone: str, CountryCode: str) -> bool:
         '''get bulk imei
@@ -39,7 +67,21 @@ class Phone(Randommer):
         Returns:
             bool: is valid
         '''
-        pass
+        endpoint = "Phone/Validate"
+        url = self.get_url() + endpoint # https://randommer.io/api/Phone/Validate
+        headers = {
+            "X-Api-Key": api_key,
+        }
+        payload = {
+            "telephone": telephone
+        }
+
+        response = requests.get(url, params = payload, headers = headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
     
     def get_countries(self, api_key: str) -> list:
         '''get countries
@@ -50,4 +92,16 @@ class Phone(Randommer):
         Returns:
             list: lsit of countries
         '''
-        pass
+        endpoint = "Phone/Countries"
+        url = self.get_url() + endpoint # https://randommer.io/api/Phone/Countries
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            return response.json()
+
+        return response.status_code
